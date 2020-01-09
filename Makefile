@@ -134,6 +134,8 @@ export GMP_OBJECTS=\
 
 all: libgmp.a
 
+check: all
+
 libgmp.a: $(GMP_OBJECTS)
 	@echo "AR $@"
 	@$(AR) cq $@ $^
