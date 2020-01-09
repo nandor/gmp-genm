@@ -1,6 +1,3 @@
-/* config.h.  Generated from config.in by configure.  */
-/* config.in.  Generated from configure.ac by autoheader.  */
-
 /*
 
 Copyright 1996-2016 Free Software Foundation, Inc.
