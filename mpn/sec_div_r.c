@@ -1,1 +1,1 @@
-../mpn/generic/sec_div.c
+sec_div.c

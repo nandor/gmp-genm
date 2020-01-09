@@ -1,1 +1,1 @@
-../mpn/generic/sec_pi1_div.c
+sec_pi1_div.c
