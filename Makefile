@@ -10,16 +10,17 @@ export CFLAGS=\
 	-O2 \
 	-pedantic \
 	-fomit-frame-pointer \
-	-m64
+	-m64 \
+	-Wno-empty-translation-unit
 
 GENERATED=\
 	fac_table.h \
 	fib_table.h \
 	mp_bases.h \
+	trialdivtab.h \
 	mpn/jacobitab.h \
 	mpn/jacobitab.h \
 	mpn/perfsqr.h \
-	trialdivtab.h \
 	mpn/fib_table.c \
 	mpn/mp_bases.c
 
@@ -81,7 +82,8 @@ export MPN_OBJECTS=\
   toom_eval_dgr3_pm2.o toom_eval_pm1.o toom_eval_pm2.o toom_eval_pm2exp.o      \
   toom_eval_pm2rexp.o toom_interpolate_12pts.o toom_interpolate_16pts.o        \
   toom_interpolate_5pts.o toom_interpolate_6pts.o toom_interpolate_7pts.o      \
-  toom_interpolate_8pts.o trialdiv.o xnor_n.o xor_n.o zero.o zero_p.o
+  toom_interpolate_8pts.o trialdiv.o xnor_n.o xor_n.o zero.o zero_p.o 				 \
+  invert_limb_table.o
 
 export MPZ_OBJECTS=\
 	2fac_ui.o add.o add_ui.o abs.o aorsmul.o aorsmul_i.o and.o array_init.o      \
@@ -128,7 +130,7 @@ export GMP_OBJECTS=\
 	$(addprefix mpq/, $(MPQ_OBJECTS))\
 	$(addprefix printf/, $(PRINTF_OBJECTS))\
 	$(addprefix scanf/, $(SCANF_OBJECTS))\
-	$(addprefix random/, $(RANDOM_OBJECTS))
+	$(addprefix rand/, $(RANDOM_OBJECTS))
 
 all: libgmp.a
 
@@ -172,9 +174,17 @@ trialdivtab.h: gen-psqr
 	@echo "EXE $@"
 	@$(CC) $< -o $@
 
-%.o: %.c $(GENERATED)
+mpn/%.o: mpn/%.c $(GENERATED)
 	@echo "CC  $@"
 	@$(CC) -DOPERATION_$(notdir $(basename $@)) $(CFLAGS) -c -o $@ $<
+
+%.o: %.c $(GENERATED)
+	@echo "CC  $@"
+	@$(CC) $(CFLAGS) -c -o $@ $<
+
+%.o: %.genm
+	@echo "AS  $@"
+	@cp $< $@
 
 .PHONY: clean
 clean:

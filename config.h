@@ -359,7 +359,7 @@ see https://www.gnu.org/licenses/.
 #define HAVE_NL_TYPES_H 1
 
 /* Define to 1 if you have the `obstack_vprintf' function. */
-#define HAVE_OBSTACK_VPRINTF 1
+/* #undef HAVE_OBSTACK_VPRINTF 1 */
 
 /* Define to 1 if you have the `popen' function. */
 #define HAVE_POPEN 1
