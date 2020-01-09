@@ -5,7 +5,6 @@ export AR=genm-ar
 export CFLAGS=\
 	-DHAVE_CONFIG_H \
 	-D__GMP_WITHIN_GMP \
-	-DNO_ASM \
 	-I. \
 	-O2 \
 	-pedantic \
@@ -14,41 +13,16 @@ export CFLAGS=\
 	-Wno-empty-translation-unit
 
 GENERATED=\
-	fac_table.h \
-	fib_table.h \
-	mp_bases.h \
-	trialdivtab.h \
-	mpn/jacobitab.h \
-	mpn/jacobitab.h \
-	mpn/perfsqr.h \
-	mpn/fib_table.c \
-	mpn/mp_bases.c
+	fac_table.h fib_table.h mp_bases.h trialdivtab.h mpn/jacobitab.h             \
+	mpn/jacobitab.h mpn/perfsqr.h mpn/fib_table.c mpn/mp_bases.c
 
 GENERATORS=\
-	gen-fac \
-	gen-fib \
-	gen-bases \
-	gen-trialdivtab \
-	gen-jacobitab \
-	gen-psqr
+	gen-fac gen-fib gen-bases gen-trialdivtab gen-jacobitab gen-psqr
 
 OBJECTS=\
-	assert.o \
-	compat.o \
-	errno.o \
-	extract-dbl.o \
-	invalid.o \
-	memory.o \
-	mp_bpl.o \
-	mp_clz_tab.o \
-	mp_dv_tab.o \
-	mp_minv_tab.o \
-	mp_get_fns.o \
-	mp_set_fns.o \
-	version.o \
-	nextprime.o \
-	primesieve.o \
-	tal-reent.o
+	assert.o compat.o errno.o extract-dbl.o invalid.o memory.o mp_bpl.o          \
+	mp_clz_tab.o mp_dv_tab.o mp_minv_tab.o mp_get_fns.o mp_set_fns.o version.o   \
+	nextprime.o primesieve.o tal-reent.o
 
 export MPN_OBJECTS=\
 	add.o add_1.o add_err1_n.o add_err2_n.o add_err3_n.o add_n.o add_n_sub_n.o   \
@@ -83,7 +57,7 @@ export MPN_OBJECTS=\
   toom_eval_pm2rexp.o toom_interpolate_12pts.o toom_interpolate_16pts.o        \
   toom_interpolate_5pts.o toom_interpolate_6pts.o toom_interpolate_7pts.o      \
   toom_interpolate_8pts.o trialdiv.o xnor_n.o xor_n.o zero.o zero_p.o 				 \
-  invert_limb_table.o
+  invert_limb_table.o fib_table.o
 
 export MPZ_OBJECTS=\
 	2fac_ui.o add.o add_ui.o abs.o aorsmul.o aorsmul_i.o and.o array_init.o      \
@@ -110,31 +84,50 @@ export MPZ_OBJECTS=\
 	xor.o
 
 export MPQ_OBJECTS=\
-	abs.o aors.o canonicalize.o clear.o clears.o cmp.o cmp_si.o cmp_ui.o div.o equal.o get_d.o get_den.o get_num.o get_str.o init.o inits.o inp_str.o inv.o md_2exp.o mul.o neg.o out_str.o set.o set_den.o set_num.o set_si.o set_str.o set_ui.o set_z.o set_d.o set_f.o swap.o
+	abs.o aors.o canonicalize.o clear.o clears.o cmp.o cmp_si.o cmp_ui.o div.o   \
+	equal.o get_d.o get_den.o get_num.o get_str.o init.o inits.o inp_str.o inv.o \
+	md_2exp.o mul.o neg.o out_str.o set.o set_den.o set_num.o set_si.o set_str.o \
+	set_ui.o set_z.o set_d.o set_f.o swap.o
 
 export MPF_OBJECTS=\
-	init.o init2.o inits.o set.o set_ui.o set_si.o set_str.o set_d.o set_z.o set_q.o iset.o iset_ui.o iset_si.o iset_str.o iset_d.o clear.o clears.o get_str.o dump.o size.o eq.o reldiff.o sqrt.o random2.o inp_str.o out_str.o add.o add_ui.o sub.o sub_ui.o ui_sub.o mul.o mul_ui.o div.o div_ui.o cmp.o cmp_d.o cmp_z.o cmp_si.o cmp_ui.o mul_2exp.o div_2exp.o abs.o neg.o get_d.o get_d_2exp.o set_dfl_prec.o set_prc.o set_prc_raw.o get_dfl_prec.o get_prc.o ui_div.o sqrt_ui.o pow_ui.o urandomb.o swap.o get_si.o get_ui.o int_p.o ceilfloor.o trunc.o fits_sint.o fits_slong.o fits_sshort.o fits_uint.o fits_ulong.o fits_ushort.o
+	init.o init2.o inits.o set.o set_ui.o set_si.o set_str.o set_d.o set_z.o     \
+	set_q.o iset.o iset_ui.o iset_si.o iset_str.o iset_d.o clear.o clears.o      \
+	get_str.o dump.o size.o eq.o reldiff.o sqrt.o random2.o inp_str.o out_str.o  \
+	add.o add_ui.o sub.o sub_ui.o ui_sub.o mul.o mul_ui.o div.o div_ui.o cmp.o   \
+	cmp_d.o cmp_z.o cmp_si.o cmp_ui.o mul_2exp.o div_2exp.o abs.o neg.o get_d.o  \
+	get_d_2exp.o set_dfl_prec.o set_prc.o set_prc_raw.o get_dfl_prec.o get_prc.o \
+	ui_div.o sqrt_ui.o pow_ui.o urandomb.o swap.o get_si.o get_ui.o int_p.o      \
+	ceilfloor.o trunc.o fits_sint.o fits_slong.o fits_sshort.o fits_uint.o       \
+	fits_ulong.o fits_ushort.o
 
 export PRINTF_OBJECTS=\
-	asprintf.o asprntffuns.o doprnt.o doprntf.o doprnti.o fprintf.o obprintf.o obvprintf.o obprntffuns.o printf.o printffuns.o snprintf.o snprntffuns.o sprintf.o sprintffuns.o vasprintf.o vfprintf.o vprintf.o vsnprintf.o vsprintf.o repl-vsnprintf.o
+	asprintf.o asprntffuns.o doprnt.o doprntf.o doprnti.o fprintf.o obprintf.o   \
+	obvprintf.o obprntffuns.o printf.o printffuns.o snprintf.o snprntffuns.o     \
+	sprintf.o sprintffuns.o vasprintf.o vfprintf.o vprintf.o vsnprintf.o         \
+	vsprintf.o repl-vsnprintf.o
 
 export SCANF_OBJECTS=\
-	doscan.o fscanf.o fscanffuns.o scanf.o sscanf.o sscanffuns.o vfscanf.o vscanf.o vsscanf.o
+	doscan.o fscanf.o fscanffuns.o scanf.o sscanf.o sscanffuns.o vfscanf.o       \
+	vscanf.o vsscanf.o
 
-export RANDOM_OBJECTS=\
-	rand.o randclr.o randdef.o randiset.o randlc2s.o randlc2x.o randmt.o randmts.o rands.o randsd.o randsdui.o randbui.o randmui.o
+export RAND_TESTS=\
+	rand.o randclr.o randdef.o randiset.o randlc2s.o randlc2x.o randmt.o         \
+	randmts.o rands.o randsd.o randsdui.o randbui.o randmui.o
 
 export GMP_OBJECTS=\
 	$(addprefix mpn/, $(MPN_OBJECTS))\
 	$(addprefix mpz/, $(MPZ_OBJECTS))\
 	$(addprefix mpq/, $(MPQ_OBJECTS))\
+	$(addprefix mpf/, $(MPF_OBJECTS))\
 	$(addprefix printf/, $(PRINTF_OBJECTS))\
 	$(addprefix scanf/, $(SCANF_OBJECTS))\
-	$(addprefix rand/, $(RANDOM_OBJECTS))
+	$(addprefix rand/, $(RAND_TESTS))\
+	$(OBJECTS)
 
 all: libgmp.a
 
 check: all
+	@$(MAKE) -C tests
 
 libgmp.a: $(GMP_OBJECTS)
 	@echo "AR $@"
@@ -148,29 +141,29 @@ fib_table.h: gen-fib
 	@echo "GEN $@"
 	@./gen-fib header 64 0 >fib_table.h
 
-mp_bases.h: gen-fib
-	@echo "GEN $@"
-	@./gen-fib table 64 0 >mpn/fib_table.c
-
-mpn/fib_table.c: gen-bases
+mp_bases.h: gen-bases
 	@echo "GEN $@"
 	@./gen-bases header 64 0 >mp_bases.h
 
-mpn/jacobitab.h: gen-bases
+mpn/fib_table.c: gen-fib
 	@echo "GEN $@"
-	@./gen-bases table 64 0 >mpn/mp_bases.c
+	@./gen-fib table 64 0 >mpn/fib_table.c
 
-mpn/mp_bases.c: gen-trialdivtab
-	@echo "GEN $@"
-	@./gen-trialdivtab 64 8000 >trialdivtab.h
-
-mpn/perfsqr.h: gen-jacobitab
+mpn/jacobitab.h: gen-jacobitab
 	@echo "GEN $@"
 	@./gen-jacobitab >mpn/jacobitab.h
 
-trialdivtab.h: gen-psqr
+mpn/mp_bases.c: gen-bases
+	@echo "GEN $@"
+	@./gen-bases table 64 0 >mpn/mp_bases.c
+
+mpn/perfsqr.h: gen-psqr
 	@echo "GEN $@"
 	@./gen-psqr 64 0 >mpn/perfsqr.h
+
+trialdivtab.h: gen-trialdivtab
+	@echo "GEN $@"
+	@./gen-trialdivtab 64 8000 >trialdivtab.h
 
 %: %.c
 	@echo "EXE $@"
@@ -188,10 +181,15 @@ mpn/%.o: mpn/%.c $(GENERATED)
 	@echo "AS  $@"
 	@cp $< $@
 
+.PHONY: install
+install: libgmp.a
+	@echo "INSTALL $<"
+	@cp $< $(PREFIX)/dist/lib/$<
+
 .PHONY: clean
 clean:
-	@$(MAKE) -C mpn clean
-	@rm -f $(GENERATED) $(GENERATORS) $(GMP_OBJECTS)
+	@$(MAKE) -C tests clean
+	@rm -f $(GENERATED) $(GENERATORS) $(GMP_OBJECTS) libgmp.a
 
 
 

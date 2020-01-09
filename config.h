@@ -1,3 +1,6 @@
+/* config.h.  Generated from config.in by configure.  */
+/* config.in.  Generated from configure.ac by autoheader.  */
+
 /*
 
 Copyright 1996-2016 Free Software Foundation, Inc.
@@ -34,7 +37,7 @@ see https://www.gnu.org/licenses/.
 
 /* The gmp-mparam.h file (a string) the tune program should suggest updating.
    */
-#define GMP_MPARAM_H_SUGGEST "./mpn/x86_64/skylake/gmp-mparam.h"
+#define GMP_MPARAM_H_SUGGEST "./mpn/generic/gmp-mparam.h"
 
 /* Define to 1 if you have the `alarm' function. */
 #define HAVE_ALARM 1
@@ -64,7 +67,7 @@ see https://www.gnu.org/licenses/.
 
 /* Define to 1 if tests/libtests has calling conventions checking for the CPU
    */
-#define HAVE_CALLING_CONVENTIONS 1
+/* #undef HAVE_CALLING_CONVENTIONS */
 
 /* Define to 1 if you have the `clock' function. */
 #define HAVE_CLOCK 1
@@ -232,16 +235,16 @@ see https://www.gnu.org/licenses/.
 
 /* Define to 1 each of the following for which a native (ie. CPU specific)
     implementation of the corresponding routine exists.  */
-#define HAVE_NATIVE_mpn_add_n 1
+/* #undef HAVE_NATIVE_mpn_add_n */
 /* #undef HAVE_NATIVE_mpn_add_n_sub_n */
-#define HAVE_NATIVE_mpn_add_nc 1
-#define HAVE_NATIVE_mpn_addaddmul_1msb0 1
-#define HAVE_NATIVE_mpn_addlsh1_n 1
-#define HAVE_NATIVE_mpn_addlsh2_n 1
-#define HAVE_NATIVE_mpn_addlsh_n 1
-#define HAVE_NATIVE_mpn_addlsh1_nc 1
-#define HAVE_NATIVE_mpn_addlsh2_nc 1
-#define HAVE_NATIVE_mpn_addlsh_nc 1
+/* #undef HAVE_NATIVE_mpn_add_nc */
+/* #undef HAVE_NATIVE_mpn_addaddmul_1msb0 */
+/* #undef HAVE_NATIVE_mpn_addlsh1_n */
+/* #undef HAVE_NATIVE_mpn_addlsh2_n */
+/* #undef HAVE_NATIVE_mpn_addlsh_n */
+/* #undef HAVE_NATIVE_mpn_addlsh1_nc */
+/* #undef HAVE_NATIVE_mpn_addlsh2_nc */
+/* #undef HAVE_NATIVE_mpn_addlsh_nc */
 /* #undef HAVE_NATIVE_mpn_addlsh1_n_ip1 */
 /* #undef HAVE_NATIVE_mpn_addlsh2_n_ip1 */
 /* #undef HAVE_NATIVE_mpn_addlsh_n_ip1 */
@@ -255,7 +258,7 @@ see https://www.gnu.org/licenses/.
 /* #undef HAVE_NATIVE_mpn_addlsh2_nc_ip2 */
 /* #undef HAVE_NATIVE_mpn_addlsh_nc_ip2 */
 /* #undef HAVE_NATIVE_mpn_addmul_1c */
-#define HAVE_NATIVE_mpn_addmul_2 1
+/* #undef HAVE_NATIVE_mpn_addmul_2 */
 /* #undef HAVE_NATIVE_mpn_addmul_3 */
 /* #undef HAVE_NATIVE_mpn_addmul_4 */
 /* #undef HAVE_NATIVE_mpn_addmul_5 */
@@ -263,73 +266,73 @@ see https://www.gnu.org/licenses/.
 /* #undef HAVE_NATIVE_mpn_addmul_7 */
 /* #undef HAVE_NATIVE_mpn_addmul_8 */
 /* #undef HAVE_NATIVE_mpn_addmul_2s */
-#define HAVE_NATIVE_mpn_and_n 1
-#define HAVE_NATIVE_mpn_andn_n 1
-#define HAVE_NATIVE_mpn_bdiv_dbm1c 1
-#define HAVE_NATIVE_mpn_bdiv_q_1 1
-#define HAVE_NATIVE_mpn_pi1_bdiv_q_1 1
-#define HAVE_NATIVE_mpn_cnd_add_n 1
-#define HAVE_NATIVE_mpn_cnd_sub_n 1
-#define HAVE_NATIVE_mpn_com 1
-#define HAVE_NATIVE_mpn_copyd 1
-#define HAVE_NATIVE_mpn_copyi 1
-#define HAVE_NATIVE_mpn_div_qr_1n_pi1 1
+/* #undef HAVE_NATIVE_mpn_and_n */
+/* #undef HAVE_NATIVE_mpn_andn_n */
+/* #undef HAVE_NATIVE_mpn_bdiv_dbm1c */
+/* #undef HAVE_NATIVE_mpn_bdiv_q_1 */
+/* #undef HAVE_NATIVE_mpn_pi1_bdiv_q_1 */
+/* #undef HAVE_NATIVE_mpn_cnd_add_n */
+/* #undef HAVE_NATIVE_mpn_cnd_sub_n */
+/* #undef HAVE_NATIVE_mpn_com */
+/* #undef HAVE_NATIVE_mpn_copyd */
+/* #undef HAVE_NATIVE_mpn_copyi */
+/* #undef HAVE_NATIVE_mpn_div_qr_1n_pi1 */
 /* #undef HAVE_NATIVE_mpn_div_qr_2 */
-#define HAVE_NATIVE_mpn_divexact_1 1
+/* #undef HAVE_NATIVE_mpn_divexact_1 */
 /* #undef HAVE_NATIVE_mpn_divexact_by3c */
-#define HAVE_NATIVE_mpn_divrem_1 1
+/* #undef HAVE_NATIVE_mpn_divrem_1 */
 /* #undef HAVE_NATIVE_mpn_divrem_1c */
-#define HAVE_NATIVE_mpn_divrem_2 1
-#define HAVE_NATIVE_mpn_gcd_1 1
-#define HAVE_NATIVE_mpn_hamdist 1
-#define HAVE_NATIVE_mpn_invert_limb 1
-#define HAVE_NATIVE_mpn_ior_n 1
-#define HAVE_NATIVE_mpn_iorn_n 1
-#define HAVE_NATIVE_mpn_lshift 1
-#define HAVE_NATIVE_mpn_lshiftc 1
+/* #undef HAVE_NATIVE_mpn_divrem_2 */
+/* #undef HAVE_NATIVE_mpn_gcd_1 */
+/* #undef HAVE_NATIVE_mpn_hamdist */
+/* #undef HAVE_NATIVE_mpn_invert_limb */
+/* #undef HAVE_NATIVE_mpn_ior_n */
+/* #undef HAVE_NATIVE_mpn_iorn_n */
+/* #undef HAVE_NATIVE_mpn_lshift */
+/* #undef HAVE_NATIVE_mpn_lshiftc */
 /* #undef HAVE_NATIVE_mpn_lshsub_n */
 /* #undef HAVE_NATIVE_mpn_mod_1 */
-#define HAVE_NATIVE_mpn_mod_1_1p 1
+/* #undef HAVE_NATIVE_mpn_mod_1_1p */
 /* #undef HAVE_NATIVE_mpn_mod_1c */
-#define HAVE_NATIVE_mpn_mod_1s_2p 1
-#define HAVE_NATIVE_mpn_mod_1s_4p 1
-#define HAVE_NATIVE_mpn_mod_34lsub1 1
-#define HAVE_NATIVE_mpn_modexact_1_odd 1
-#define HAVE_NATIVE_mpn_modexact_1c_odd 1
-#define HAVE_NATIVE_mpn_mul_1 1
+/* #undef HAVE_NATIVE_mpn_mod_1s_2p */
+/* #undef HAVE_NATIVE_mpn_mod_1s_4p */
+/* #undef HAVE_NATIVE_mpn_mod_34lsub1 */
+/* #undef HAVE_NATIVE_mpn_modexact_1_odd */
+/* #undef HAVE_NATIVE_mpn_modexact_1c_odd */
+/* #undef HAVE_NATIVE_mpn_mul_1 */
 /* #undef HAVE_NATIVE_mpn_mul_1c */
-#define HAVE_NATIVE_mpn_mul_2 1
+/* #undef HAVE_NATIVE_mpn_mul_2 */
 /* #undef HAVE_NATIVE_mpn_mul_3 */
 /* #undef HAVE_NATIVE_mpn_mul_4 */
 /* #undef HAVE_NATIVE_mpn_mul_5 */
 /* #undef HAVE_NATIVE_mpn_mul_6 */
-#define HAVE_NATIVE_mpn_mul_basecase 1
-#define HAVE_NATIVE_mpn_mullo_basecase 1
-#define HAVE_NATIVE_mpn_nand_n 1
-#define HAVE_NATIVE_mpn_nior_n 1
-#define HAVE_NATIVE_mpn_popcount 1
-#define HAVE_NATIVE_mpn_preinv_divrem_1 1
+/* #undef HAVE_NATIVE_mpn_mul_basecase */
+/* #undef HAVE_NATIVE_mpn_mullo_basecase */
+/* #undef HAVE_NATIVE_mpn_nand_n */
+/* #undef HAVE_NATIVE_mpn_nior_n */
+/* #undef HAVE_NATIVE_mpn_popcount */
+/* #undef HAVE_NATIVE_mpn_preinv_divrem_1 */
 /* #undef HAVE_NATIVE_mpn_preinv_mod_1 */
-#define HAVE_NATIVE_mpn_redc_1 1
+/* #undef HAVE_NATIVE_mpn_redc_1 */
 /* #undef HAVE_NATIVE_mpn_redc_2 */
-#define HAVE_NATIVE_mpn_rsblsh1_n 1
-#define HAVE_NATIVE_mpn_rsblsh2_n 1
-#define HAVE_NATIVE_mpn_rsblsh_n 1
-#define HAVE_NATIVE_mpn_rsblsh1_nc 1
+/* #undef HAVE_NATIVE_mpn_rsblsh1_n */
+/* #undef HAVE_NATIVE_mpn_rsblsh2_n */
+/* #undef HAVE_NATIVE_mpn_rsblsh_n */
+/* #undef HAVE_NATIVE_mpn_rsblsh1_nc */
 /* #undef HAVE_NATIVE_mpn_rsblsh2_nc */
 /* #undef HAVE_NATIVE_mpn_rsblsh_nc */
-#define HAVE_NATIVE_mpn_rsh1add_n 1
-#define HAVE_NATIVE_mpn_rsh1add_nc 1
-#define HAVE_NATIVE_mpn_rsh1sub_n 1
-#define HAVE_NATIVE_mpn_rsh1sub_nc 1
-#define HAVE_NATIVE_mpn_rshift 1
-#define HAVE_NATIVE_mpn_sqr_basecase 1
+/* #undef HAVE_NATIVE_mpn_rsh1add_n */
+/* #undef HAVE_NATIVE_mpn_rsh1add_nc */
+/* #undef HAVE_NATIVE_mpn_rsh1sub_n */
+/* #undef HAVE_NATIVE_mpn_rsh1sub_nc */
+/* #undef HAVE_NATIVE_mpn_rshift */
+/* #undef HAVE_NATIVE_mpn_sqr_basecase */
 /* #undef HAVE_NATIVE_mpn_sqr_diagonal */
-#define HAVE_NATIVE_mpn_sqr_diag_addlsh1 1
-#define HAVE_NATIVE_mpn_sub_n 1
-#define HAVE_NATIVE_mpn_sub_nc 1
-#define HAVE_NATIVE_mpn_sublsh1_n 1
-#define HAVE_NATIVE_mpn_sublsh2_n 1
+/* #undef HAVE_NATIVE_mpn_sqr_diag_addlsh1 */
+/* #undef HAVE_NATIVE_mpn_sub_n */
+/* #undef HAVE_NATIVE_mpn_sub_nc */
+/* #undef HAVE_NATIVE_mpn_sublsh1_n */
+/* #undef HAVE_NATIVE_mpn_sublsh2_n */
 /* #undef HAVE_NATIVE_mpn_sublsh_n */
 /* #undef HAVE_NATIVE_mpn_sublsh1_nc */
 /* #undef HAVE_NATIVE_mpn_sublsh2_nc */
@@ -346,8 +349,8 @@ see https://www.gnu.org/licenses/.
 /* #undef HAVE_NATIVE_mpn_udiv_qrnnd_r */
 /* #undef HAVE_NATIVE_mpn_umul_ppmm */
 /* #undef HAVE_NATIVE_mpn_umul_ppmm_r */
-#define HAVE_NATIVE_mpn_xor_n 1
-#define HAVE_NATIVE_mpn_xnor_n 1
+/* #undef HAVE_NATIVE_mpn_xor_n */
+/* #undef HAVE_NATIVE_mpn_xnor_n */
 
 /* Define to 1 if you have the `nl_langinfo' function. */
 #define HAVE_NL_LANGINFO 1
@@ -356,7 +359,7 @@ see https://www.gnu.org/licenses/.
 #define HAVE_NL_TYPES_H 1
 
 /* Define to 1 if you have the `obstack_vprintf' function. */
-/* #undef HAVE_OBSTACK_VPRINTF 1 */
+/* #undef HAVE_OBSTACK_VPRINTF */
 
 /* Define to 1 if you have the `popen' function. */
 #define HAVE_POPEN 1
@@ -510,7 +513,7 @@ see https://www.gnu.org/licenses/.
 #define LT_OBJDIR ".libs/"
 
 /* Define to 1 to disable the use of inline assembly */
-/* #undef NO_ASM */
+#define NO_ASM 1
 
 /* Name of package */
 #define PACKAGE "gmp"
@@ -561,7 +564,7 @@ see https://www.gnu.org/licenses/.
 #define TIME_WITH_SYS_TIME 1
 
 /* Maximum size the tune program can test for SQR_TOOM2_THRESHOLD */
-/* #undef TUNE_SQR_TOOM2_MAX */
+#define TUNE_SQR_TOOM2_MAX SQR_TOOM2_MAX_GENERIC
 
 /* Version number of package */
 #define VERSION "6.1.2"
