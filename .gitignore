@@ -1,2 +1,17 @@
 *.o
 *.a
+gen-fac
+gen-fib
+gen-bases
+gen-trialdivtab
+gen-jacobitab
+gen-psqr
+fac_table.h
+fib_table.h
+mp_bases.h
+mpn/jacobitab.h
+mpn/jacobitab.h
+mpn/perfsqr.h
+trialdivtab.h
+mpn/fib_table.c
+mpn/mp_bases.c
