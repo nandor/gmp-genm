@@ -123,7 +123,6 @@ export GMP_OBJECTS=\
 	$(OBJECTS)
 
 all: libgmp.a
-	@$(MAKE) -C tests all
 
 check: libgmp.a
 	@$(MAKE) -C tests check
@@ -174,7 +173,7 @@ mpn/%.o: mpn/%.c $(GENERATED)
 
 %.o: %.c $(GENERATED)
 	@echo "CC  $@"
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 %.o: %.genm
 	@echo "AS  $@"
