@@ -9,12 +9,12 @@ TESTS=\
 	t-sub
 
 MPN_TESTS=\
-  t-asmtype t-aors_1 t-divrem_1 t-mod_1 t-fat t-get_d t-instrument t-iord_u    \
-  t-mp_bases t-perfsqr t-scan logic t-toom22 t-toom32 t-toom33 t-toom42        \
-  t-toom43 t-toom44 t-toom52 t-toom53 t-toom54 t-toom62 t-toom63 t-toom6h      \
-  t-toom8h t-toom2-sqr t-toom3-sqr t-toom4-sqr t-toom6-sqr t-toom8-sqr t-div   \
-  t-mul t-mullo t-sqrlo t-mulmod_bnm1 t-sqrmod_bnm1 t-mulmid t-hgcd t-hgcd_appr\
-  t-matrix22 t-invert t-bdiv t-broot t-brootinv t-minvert t-sizeinbase
+	t-asmtype t-aors_1 t-divrem_1 t-mod_1 t-fat t-get_d t-instrument t-iord_u    \
+	t-mp_bases t-perfsqr t-scan logic t-toom22 t-toom32 t-toom33 t-toom42        \
+	t-toom43 t-toom44 t-toom52 t-toom53 t-toom54 t-toom62 t-toom63 t-toom6h      \
+	t-toom8h t-toom2-sqr t-toom3-sqr t-toom4-sqr t-toom6-sqr t-toom8-sqr t-div   \
+	t-mul t-mullo t-sqrlo t-mulmod_bnm1 t-sqrmod_bnm1 t-mulmid t-hgcd t-hgcd_appr\
+	t-matrix22 t-invert t-bdiv t-broot t-brootinv t-minvert t-sizeinbase
 
 MPZ_TESTS=\
 	reuse t-addsub t-cmp t-mul t-mul_i t-tdiv t-tdiv_ui t-fdiv t-fdiv_ui         \
@@ -52,6 +52,8 @@ GMP_TESTS=\
 	$(TESTS)
 
 all: $(GMP_TESTS)
+
+check: $(GMP_TESTS)
 	@for test in $?; do \
 		OUT=`./$$test &> /dev/null`; \
 		if [ "$$?" -ne "0" ]; then \
@@ -60,7 +62,7 @@ all: $(GMP_TESTS)
 	done;
 
 libtest.a: $(TEST_OBJECTS)
-	@echo "AR $@"
+	@echo "AR  $@"
 	@$(AR) cq $@ $^
 
 %.o: %.c

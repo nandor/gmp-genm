@@ -1,6 +1,6 @@
 
-export CC=genm-gcc
-export AR=genm-ar
+export CC?=genm-gcc
+export AR?=genm-ar
 
 export CFLAGS=\
 	-DHAVE_CONFIG_H \
@@ -110,7 +110,7 @@ export SCANF_OBJECTS=\
 	doscan.o fscanf.o fscanffuns.o scanf.o sscanf.o sscanffuns.o vfscanf.o       \
 	vscanf.o vsscanf.o
 
-export RAND_TESTS=\
+export RAND_OBJECTS=\
 	rand.o randclr.o randdef.o randiset.o randlc2s.o randlc2x.o randmt.o         \
 	randmts.o rands.o randsd.o randsdui.o randbui.o randmui.o
 
@@ -121,13 +121,14 @@ export GMP_OBJECTS=\
 	$(addprefix mpf/, $(MPF_OBJECTS))\
 	$(addprefix printf/, $(PRINTF_OBJECTS))\
 	$(addprefix scanf/, $(SCANF_OBJECTS))\
-	$(addprefix rand/, $(RAND_TESTS))\
+	$(addprefix rand/, $(RAND_OBJECTS))\
 	$(OBJECTS)
 
 all: libgmp.a
+	@$(MAKE) -C tests all
 
-check: all
-	@$(MAKE) -C tests
+check: libgmp.a
+	@$(MAKE) -C tests check
 
 libgmp.a: $(GMP_OBJECTS)
 	@echo "AR $@"
@@ -175,7 +176,7 @@ mpn/%.o: mpn/%.c $(GENERATED)
 
 %.o: %.c $(GENERATED)
 	@echo "CC  $@"
-	@$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 %.o: %.genm
 	@echo "AS  $@"
@@ -183,8 +184,8 @@ mpn/%.o: mpn/%.c $(GENERATED)
 
 .PHONY: install
 install: libgmp.a
-	@echo "INSTALL $<"
-	@cp $< $(PREFIX)/dist/lib/$<
+	@cp libgmp.a $(PREFIX)/lib/libgmp.a
+	@cp gmp.h $(PREFIX)/include/gmp.h
 
 .PHONY: clean
 clean:
