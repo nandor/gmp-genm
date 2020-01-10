@@ -190,3 +190,5 @@ tests/t-popc
 tests/t-printf.tmp
 tests/t-scanf.tmp
 tests/t-sub
+
+Makefile.config

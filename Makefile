@@ -1,6 +1,4 @@
-
-export CC?=genm-gcc
-export AR?=genm-ar
+include Makefile.config
 
 export CFLAGS=\
 	-DHAVE_CONFIG_H \
