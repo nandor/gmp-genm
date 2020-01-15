@@ -181,21 +181,10 @@ mpn/%.o: mpn/%.c $(GENERATED)
 
 .PHONY: install
 install: libgmp.a
-	@cp libgmp.a $(PREFIX)/lib/ocaml/libgmp.a
-	@cp gmp.h $(PREFIX)/lib/ocaml/gmp.h
+	@cp libgmp.a $(PREFIX)/lib/libgmp.a
+	@cp gmp.h $(PREFIX)/include/gmp.h
 
 .PHONY: clean
 clean:
 	@$(MAKE) -C tests clean
 	@rm -f $(GENERATED) $(GENERATORS) $(GMP_OBJECTS) libgmp.a
-
-
-
-
-
-
-
-
-
-
-
