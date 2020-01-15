@@ -1,4 +1,3 @@
-include Makefile.config
 
 export CFLAGS=\
 	-DHAVE_CONFIG_H \
@@ -181,7 +180,9 @@ mpn/%.o: mpn/%.c $(GENERATED)
 
 .PHONY: install
 install: libgmp.a
+	@mkdir -p $(PREFIX)/lib
 	@cp libgmp.a $(PREFIX)/lib/libgmp.a
+	@mkdir -p $(PREFIX)/include
 	@cp gmp.h $(PREFIX)/include/gmp.h
 
 .PHONY: clean
