@@ -1,4 +1,4 @@
-# genm-gmp
+# llir-gmp
 
-GenM version of the GNU MP Library
+LLIR version of the GNU MP Library
 

@@ -174,7 +174,7 @@ mpn/%.o: mpn/%.c $(GENERATED)
 	@echo "CC  $@"
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
-%.o: %.genm
+%.o: %.llir
 	@echo "AS  $@"
 	@cp $< $@
 
