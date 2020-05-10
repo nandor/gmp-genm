@@ -174,9 +174,9 @@ mpn/%.o: mpn/%.c $(GENERATED)
 	@echo "CC  $@"
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
-%.o: %.llir
+%.o: %.S
 	@echo "AS  $@"
-	@cp $< $@
+	@$(CC) $(ASFLAGS) -c -o $@ $<
 
 .PHONY: install
 install: libgmp.a
