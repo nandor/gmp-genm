@@ -1,5 +1,5 @@
 
-export CFLAGS=\
+CFLAGS=\
 	-DHAVE_CONFIG_H \
 	-D__GMP_WITHIN_GMP \
 	-I. \
@@ -21,7 +21,7 @@ OBJECTS=\
 	mp_clz_tab.o mp_dv_tab.o mp_minv_tab.o mp_get_fns.o mp_set_fns.o version.o   \
 	nextprime.o primesieve.o tal-reent.o
 
-export MPN_OBJECTS=\
+MPN_OBJECTS=\
 	add.o add_1.o add_err1_n.o add_err2_n.o add_err3_n.o add_n.o add_n_sub_n.o   \
 	addmul_1.o and_n.o andn_n.o bdiv_dbm1c.o bdiv_q.o bdiv_q_1.o bdiv_qr.o       \
 	binvert.o broot.o brootinv.o bsqrt.o bsqrtinv.o cmp.o cnd_add_n.o cnd_sub_n.o\
@@ -56,7 +56,7 @@ export MPN_OBJECTS=\
   toom_interpolate_8pts.o trialdiv.o xnor_n.o xor_n.o zero.o zero_p.o 				 \
   invert_limb_table.o fib_table.o
 
-export MPZ_OBJECTS=\
+MPZ_OBJECTS=\
 	2fac_ui.o add.o add_ui.o abs.o aorsmul.o aorsmul_i.o and.o array_init.o      \
 	bin_ui.o bin_uiui.o cdiv_q.o cdiv_q_ui.o cdiv_qr.o cdiv_qr_ui.o cdiv_r.o     \
 	cdiv_r_ui.o cdiv_ui.o cfdiv_q_2exp.o cfdiv_r_2exp.o clear.o clears.o clrbit.o\
@@ -80,13 +80,13 @@ export MPZ_OBJECTS=\
 	tdiv_r_2exp.o tdiv_r_ui.o tstbit.o ui_pow_ui.o ui_sub.o urandomb.o urandomm.o\
 	xor.o
 
-export MPQ_OBJECTS=\
+MPQ_OBJECTS=\
 	abs.o aors.o canonicalize.o clear.o clears.o cmp.o cmp_si.o cmp_ui.o div.o   \
 	equal.o get_d.o get_den.o get_num.o get_str.o init.o inits.o inp_str.o inv.o \
 	md_2exp.o mul.o neg.o out_str.o set.o set_den.o set_num.o set_si.o set_str.o \
 	set_ui.o set_z.o set_d.o set_f.o swap.o
 
-export MPF_OBJECTS=\
+MPF_OBJECTS=\
 	init.o init2.o inits.o set.o set_ui.o set_si.o set_str.o set_d.o set_z.o     \
 	set_q.o iset.o iset_ui.o iset_si.o iset_str.o iset_d.o clear.o clears.o      \
 	get_str.o dump.o size.o eq.o reldiff.o sqrt.o random2.o inp_str.o out_str.o  \
@@ -97,21 +97,21 @@ export MPF_OBJECTS=\
 	ceilfloor.o trunc.o fits_sint.o fits_slong.o fits_sshort.o fits_uint.o       \
 	fits_ulong.o fits_ushort.o
 
-export PRINTF_OBJECTS=\
+PRINTF_OBJECTS=\
 	asprintf.o asprntffuns.o doprnt.o doprntf.o doprnti.o fprintf.o obprintf.o   \
 	obvprintf.o obprntffuns.o printf.o printffuns.o snprintf.o snprntffuns.o     \
 	sprintf.o sprintffuns.o vasprintf.o vfprintf.o vprintf.o vsnprintf.o         \
 	vsprintf.o repl-vsnprintf.o
 
-export SCANF_OBJECTS=\
+SCANF_OBJECTS=\
 	doscan.o fscanf.o fscanffuns.o scanf.o sscanf.o sscanffuns.o vfscanf.o       \
 	vscanf.o vsscanf.o
 
-export RAND_OBJECTS=\
+RAND_OBJECTS=\
 	rand.o randclr.o randdef.o randiset.o randlc2s.o randlc2x.o randmt.o         \
 	randmts.o rands.o randsd.o randsdui.o randbui.o randmui.o
 
-export GMP_OBJECTS=\
+GMP_OBJECTS=\
 	$(addprefix mpn/, $(MPN_OBJECTS))\
 	$(addprefix mpz/, $(MPZ_OBJECTS))\
 	$(addprefix mpq/, $(MPQ_OBJECTS))\
@@ -121,7 +121,9 @@ export GMP_OBJECTS=\
 	$(addprefix rand/, $(RAND_OBJECTS))\
 	$(OBJECTS)
 
-all: libgmp.a
+GMP_PIC_OBJECTS=$(GMP_OBJECTS:.o=.lo)
+
+all: libgmp.a libgmp.so
 
 check: libgmp.a
 	@$(MAKE) -C tests check
@@ -129,6 +131,10 @@ check: libgmp.a
 libgmp.a: $(GMP_OBJECTS)
 	@echo "AR $@"
 	@$(AR) cq $@ $^
+
+libgmp.so: $(GMP_PIC_OBJECTS)
+	@echo "LIB $@"
+	@$(CC) -o $@ -shared $^
 
 fac_table.h: gen-fac
 	@echo "GEN $@"
@@ -170,22 +176,37 @@ mpn/%.o: mpn/%.c $(GENERATED)
 	@echo "CC  $@"
 	@$(CC) -DOPERATION_$(notdir $(basename $@)) $(CFLAGS) -c -o $@ $<
 
+mpn/%.lo: mpn/%.c $(GENERATED)
+	@echo "CC  $@"
+	@$(CC) -DOPERATION_$(notdir $(basename $@)) $(CFLAGS) -c -o $@ -fPIC $<
+
 %.o: %.c $(GENERATED)
 	@echo "CC  $@"
 	@$(CC) $(CFLAGS) -c -o $@ $<
+
+%.lo: %.c $(GENERATED)
+	@echo "CC  $@"
+	@$(CC) $(CFLAGS) -c -o $@ -fPIC $<
 
 %.o: %.S
 	@echo "AS  $@"
 	@$(CC) $(ASFLAGS) -c -o $@ $<
 
+%.lo: %.S
+	@echo "AS  $@"
+	@$(CC) $(ASFLAGS) -c -o $@ -fPIC $<
+
 .PHONY: install
-install: libgmp.a
+install: libgmp.a libgmp.so
 	@mkdir -p $(PREFIX)/lib
 	@cp libgmp.a $(PREFIX)/lib/libgmp.a
+	@cp libgmp.so $(PREFIX)/lib/libgmp.so
 	@mkdir -p $(PREFIX)/include
 	@cp gmp.h $(PREFIX)/include/gmp.h
 
 .PHONY: clean
 clean:
-	@$(MAKE) -C tests clean
-	@rm -f $(GENERATED) $(GENERATORS) $(GMP_OBJECTS) libgmp.a
+	$(MAKE) -C tests clean
+	rm -f $(GENERATED) $(GENERATORS)
+	rm -f $(GMP_OBJECTS) $(GMP_SHARED_OBJECTS)
+	rm -f libgmp.a libgmp.so

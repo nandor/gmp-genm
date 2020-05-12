@@ -1,5 +1,7 @@
 *.o
+*.lo
 *.a
+*.so
 gen-fac
 gen-fib
 gen-bases
