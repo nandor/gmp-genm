@@ -1,5 +1,6 @@
+include ../Makefile.config
 
-CFLAGS:=$(CFLAGS) -I..
+CFLAGS:=$(CFLAGS) -I. -I..
 
 TEST_OBJECTS=\
 	memory.o misc.o refmpf.o refmpn.o refmpq.o refmpz.o spinner.o trace.o
@@ -67,11 +68,11 @@ libtest.a: $(TEST_OBJECTS)
 
 %.o: %.c
 	@echo "CC  $@"
-	@$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 %: %.c libtest.a ../libgmp.a
 	@echo "EXE $@"
-	@$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 .PHONY: clean
 clean:

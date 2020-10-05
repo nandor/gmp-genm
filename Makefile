@@ -1,4 +1,6 @@
 
+include Makefile.config
+
 CFLAGS=\
 	-DHAVE_CONFIG_H \
 	-D__GMP_WITHIN_GMP \
@@ -131,6 +133,7 @@ check: libgmp.a
 libgmp.a: $(GMP_OBJECTS)
 	@echo "AR $@"
 	@$(AR) cq $@ $^
+	@$(RANLIB) $@
 
 libgmp.so: $(GMP_PIC_OBJECTS)
 	@echo "LIB $@"
@@ -199,9 +202,9 @@ mpn/%.lo: mpn/%.c $(GENERATED)
 .PHONY: install
 install: libgmp.a libgmp.so
 	@mkdir -p $(PREFIX)/lib
+	@mkdir -p $(PREFIX)/include
 	@cp libgmp.a $(PREFIX)/lib/libgmp.a
 	@cp libgmp.so $(PREFIX)/lib/libgmp.so
-	@mkdir -p $(PREFIX)/include
 	@cp gmp.h $(PREFIX)/include/gmp.h
 
 .PHONY: clean
