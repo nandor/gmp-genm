@@ -54,13 +54,17 @@ GMP_TESTS=\
 
 all: $(GMP_TESTS)
 
-check: $(GMP_TESTS)
-	@for test in $?; do \
-		OUT=`./$$test &> /dev/null`; \
-		if [ "$$?" -ne "0" ]; then \
-			echo "failed: $$test"; \
-		fi; \
-	done;
+GMP_TEST_RESULTS=$(GMP_TESTS:=.result)
+
+test-dummy:
+
+all_tests: $(GMP_TESTS)
+
+%.result: % test-dummy all_tests
+	@./$< > $@ 2>&1 && echo "pass: $<" || echo "failed: $<"
+
+.PHONY: check
+check: $(GMP_TEST_RESULTS)
 
 libtest.a: $(TEST_OBJECTS)
 	@echo "AR  $@"
@@ -68,12 +72,12 @@ libtest.a: $(TEST_OBJECTS)
 
 %.o: %.c
 	@echo "CC  $@"
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 %: %.c libtest.a ../libgmp.a
 	@echo "EXE $@"
-	$(CC) $(CFLAGS) -o $@ $^
+	@$(CC) $(CFLAGS) -o $@ $^
 
 .PHONY: clean
 clean:
-	@rm -rf $(TESTS) $(TEST_OBJECTS) libtest.a
+	@rm -rf $(TESTS) $(TEST_OBJECTS) $(TEST_RESULTS) libtest.a

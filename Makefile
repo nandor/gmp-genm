@@ -211,5 +211,5 @@ install: libgmp.a libgmp.so
 clean:
 	$(MAKE) -C tests clean
 	rm -f $(GENERATED) $(GENERATORS)
-	rm -f $(GMP_OBJECTS) $(GMP_SHARED_OBJECTS)
+	rm -f $(GMP_OBJECTS) $(GMP_PIC_OBJECTS)
 	rm -f libgmp.a libgmp.so

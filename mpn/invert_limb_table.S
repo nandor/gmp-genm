@@ -1,4 +1,4 @@
-  .section  .rodata
+  .section .const
   .globl __gmpn_invert_limb_table
   .p2align 1
 __gmpn_invert_limb_table:
