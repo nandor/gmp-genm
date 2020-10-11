@@ -19,14 +19,17 @@ done
 llir=`cat $prefix/lib/ocaml/Makefile.config | grep LLIR | sed -e s/LLIR=//g`
 
 
+echo "# gmp configuration" > Makefile.config
+
 if test x"$llir" = xtrue; then
   tool_prefix="llir_$host-"
+  echo "AR=${tool_prefix}ar" >> Makefile.config
+  echo "RANLIB=${tool_prefix}ranlib" >> Makefile.config
+  echo "CC=${tool_prefix}gcc" >> Makefile.config
+  echo "PREFIX=${prefix}" >> Makefile.config
 else
-  tool_prefix=""
+  echo "AR=ar" >> Makefile.config
+  echo "RANLIB=ranlib" >> Makefile.config
+  echo "CC=$CC" >> Makefile.config
+  echo "PREFIX=${prefix}" >> Makefile.config
 fi
-
-echo "# gmp configuration" > Makefile.config
-echo "AR=${tool_prefix}ar" >> Makefile.config
-echo "RANLIB=${tool_prefix}ranlib" >> Makefile.config
-echo "CC=${tool_prefix}gcc" >> Makefile.config
-echo "PREFIX=${prefix}" >> Makefile.config
