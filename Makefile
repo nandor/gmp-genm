@@ -127,7 +127,7 @@ GMP_PIC_OBJECTS=$(GMP_OBJECTS:.o=.lo)
 
 all: libgmp.a libgmp.so
 
-check: libgmp.a
+check: libgmp.a libgmp.so
 	@$(MAKE) -C tests check
 
 libgmp.a: $(GMP_OBJECTS)
