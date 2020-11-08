@@ -1,35 +1,24 @@
 #!/bin/sh
 
 prefix=/usr
-host=none
 
 while : ; do
   case "$1" in
     "") break;;
     --prefix)
       prefix=$2; shift;;
-    --host)
-      host=$2; shift;;
     *)
       >&2 echo "Unknown option \"$1\".";;
   esac
   shift
 done
 
-llir=`cat $prefix/lib/ocaml/Makefile.config | grep LLIR | sed -e s/LLIR=//g`
-
+arch=`cat $prefix/lib/ocaml/Makefile.config | grep '^ARCH' | sed -e s/ARCH=//g`
 
 echo "# gmp configuration" > Makefile.config
 
-if test x"$llir" = xtrue; then
-  tool_prefix="llir_$host-"
-  echo "AR=${tool_prefix}ar" >> Makefile.config
-  echo "RANLIB=${tool_prefix}ranlib" >> Makefile.config
-  echo "CC=${tool_prefix}gcc" >> Makefile.config
-  echo "PREFIX=${prefix}" >> Makefile.config
-else
-  echo "AR=ar" >> Makefile.config
-  echo "RANLIB=ranlib" >> Makefile.config
-  echo "CC=$CC" >> Makefile.config
-  echo "PREFIX=${prefix}" >> Makefile.config
-fi
+tool_prefix="$arch-pc-linux-musl-"
+echo "AR=${tool_prefix}ar" >> Makefile.config
+echo "RANLIB=${tool_prefix}ranlib" >> Makefile.config
+echo "CC=${tool_prefix}gcc" >> Makefile.config
+echo "PREFIX=${prefix}" >> Makefile.config
