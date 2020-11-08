@@ -15,16 +15,33 @@ done
 
 arch=`cat $prefix/lib/ocaml/Makefile.config | grep '^ARCH' | head -n 1 | sed -e s/ARCH=//g`
 case "$arch" in
-  "llir_arm64") arch="llir_aarch64";;
-  "arm64") arch="aarch64";;
+  "llir_amd64")
+    cc="llir_x86_64-pc-linux-musl-clang"
+    ar="llir_x86_64-pc-linux-musl-ar"
+    ranlib="llir_x86_64-pc-linux-musl-ranlib"
+    ;;
+  "amd64")
+    cc="x86_64-pc-linux-musl-clang"
+    ar="x86_64-linux-gnu-ar"
+    ranlib="x86_64-linux-gnu-ranlib"
+    ;;
+  "llir_arm64")
+    cc="llir_aarch64-pc-linux-musl-clang"
+    ar="llir_aarch64-pc-linux-musl-ar"
+    ranlib="llir_aarch64-pc-linux-musl-ranlib"
+    ;;
+  "arm64")
+    cc="aarch64-pc-linux-musl-clang"
+    ar="aarch64-linux-gnu-ar"
+    ranlib="aarch64-linux-gnu-ranlib"
+    ;;
   *)
     ;;
 esac
 
 echo "# gmp configuration" > Makefile.config
 
-tool_prefix="$arch-pc-linux-musl-"
-echo "AR=${tool_prefix}ar" >> Makefile.config
-echo "RANLIB=${tool_prefix}ranlib" >> Makefile.config
-echo "CC=${tool_prefix}gcc" >> Makefile.config
+echo "AR=${ar}" >> Makefile.config
+echo "RANLIB=${ranlib}" >> Makefile.config
+echo "CC=${cc}" >> Makefile.config
 echo "PREFIX=${prefix}" >> Makefile.config
