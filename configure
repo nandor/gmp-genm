@@ -35,6 +35,16 @@ case "$arch" in
     ar="aarch64-linux-gnu-ar"
     ranlib="aarch64-linux-gnu-ranlib"
     ;;
+  "llir_ppc64")
+    cc="llir_ppc64le-unknown-linux-musl-clang"
+    ar="llir_ppc64le-unknown-linux-musl-ar"
+    ranlib="llir_ppc64le-unknown-linux-musl-ranlib"
+    ;;
+  "ppc64")
+    cc="ppc64le-unknown-linux-musl-clang"
+    ar="ppc64le-linux-gnu-ar"
+    ranlib="ppc64le-linux-gnu-ranlib"
+    ;;
   *)
     ;;
 esac
