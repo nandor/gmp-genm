@@ -16,22 +16,22 @@ done
 arch=`cat $prefix/lib/ocaml/Makefile.config | grep '^ARCH' | head -n 1 | sed -e s/ARCH=//g`
 case "$arch" in
   "llir_amd64")
-    cc="llir_x86_64-pc-linux-musl-clang"
-    ar="llir_x86_64-pc-linux-musl-ar"
-    ranlib="llir_x86_64-pc-linux-musl-ranlib"
+    cc="llir_x86_64-unknown-linux-musl-clang"
+    ar="llir_x86_64-unknown-linux-musl-ar"
+    ranlib="llir_x86_64-unknown-linux-musl-ranlib"
     ;;
   "amd64")
-    cc="x86_64-pc-linux-musl-clang"
+    cc="x86_64-unknown-linux-musl-clang"
     ar="x86_64-linux-gnu-ar"
     ranlib="x86_64-linux-gnu-ranlib"
     ;;
   "llir_arm64")
-    cc="llir_aarch64-pc-linux-musl-clang"
-    ar="llir_aarch64-pc-linux-musl-ar"
-    ranlib="llir_aarch64-pc-linux-musl-ranlib"
+    cc="llir_aarch64-unknown-linux-musl-clang"
+    ar="llir_aarch64-unknown-linux-musl-ar"
+    ranlib="llir_aarch64-unknown-linux-musl-ranlib"
     ;;
   "arm64")
-    cc="aarch64-pc-linux-musl-clang"
+    cc="aarch64-unknown-linux-musl-clang"
     ar="aarch64-linux-gnu-ar"
     ranlib="aarch64-linux-gnu-ranlib"
     ;;
