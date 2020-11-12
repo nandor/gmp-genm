@@ -1,7 +1,7 @@
 
 include Makefile.config
 
-CFLAGS=\
+CFLAGS:=$(CFLAGS) \
 	-DHAVE_CONFIG_H \
 	-D__GMP_WITHIN_GMP \
 	-I. \

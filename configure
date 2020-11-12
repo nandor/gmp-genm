@@ -42,8 +42,18 @@ case "$arch" in
     ;;
   "ppc64")
     cc="ppc64le-unknown-linux-musl-clang"
-    ar="ppc64le-linux-gnu-ar"
-    ranlib="ppc64le-linux-gnu-ranlib"
+    ar="ppc64le-unkown-linux-gnu-ar"
+    ranlib="ppc64le-unknown-linux-gnu-ranlib"
+    ;;
+  "llir_riscv")
+    cc="llir_riscv64-unknown-linux-musl-clang"
+    ar="llir_riscv64-unknown-linux-musl-ar"
+    ranlib="llir_riscv64-unknown-linux-musl-ranlib"
+    ;;
+  "riscv")
+    cc="riscv64-unknown-linux-musl-clang"
+    ar="riscv64-unknown-linux-gnu-ar"
+    ranlib="riscv64-unknown-linux-gnu-ranlib"
     ;;
   *)
     ;;
