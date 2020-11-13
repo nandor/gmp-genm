@@ -35,15 +35,15 @@ case "$arch" in
     ar="aarch64-linux-gnu-ar"
     ranlib="aarch64-linux-gnu-ranlib"
     ;;
-  "llir_ppc64")
-    cc="llir_ppc64le-unknown-linux-musl-clang"
-    ar="llir_ppc64le-unknown-linux-musl-ar"
-    ranlib="llir_ppc64le-unknown-linux-musl-ranlib"
+  "llir_power")
+    cc="llir_powerpc64le-unknown-linux-musl-clang"
+    ar="llir_powerpc64le-unknown-linux-musl-ar"
+    ranlib="llir_powerpc64le-unknown-linux-musl-ranlib"
     ;;
-  "ppc64")
-    cc="ppc64le-unknown-linux-musl-clang"
-    ar="ppc64le-unkown-linux-gnu-ar"
-    ranlib="ppc64le-unknown-linux-gnu-ranlib"
+  "power")
+    cc="powerpc64le-unknown-linux-musl-clang"
+    ar="powerpc64le-unkown-linux-gnu-ar"
+    ranlib="powerpc64le-unknown-linux-gnu-ranlib"
     ;;
   "llir_riscv")
     cc="llir_riscv64-unknown-linux-musl-clang"
