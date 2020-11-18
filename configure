@@ -42,7 +42,7 @@ case "$arch" in
     ;;
   "power")
     cc="powerpc64le-unknown-linux-musl-clang"
-    ar="powerpc64le-unkown-linux-gnu-ar"
+    ar="powerpc64le-unknown-linux-gnu-ar"
     ranlib="powerpc64le-unknown-linux-gnu-ranlib"
     ;;
   "llir_riscv")
