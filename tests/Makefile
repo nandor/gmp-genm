@@ -58,9 +58,9 @@ GMP_TEST_RESULTS=$(GMP_TESTS:=.result)
 
 test-dummy:
 
-all_tests: $(GMP_TESTS)
+all_tests: $(addsuffix .exe, $(GMP_TESTS))
 
-%.result: % test-dummy all_tests
+%.result: %.exe test-dummy all_tests
 	@./$< > $@ 2>&1 && echo "pass: $<" || echo "failed: $<"
 
 .PHONY: check
@@ -74,7 +74,7 @@ libtest.a: $(TEST_OBJECTS)
 	@echo "CC  $@"
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
-%: %.c libtest.a ../libgmp.a
+%.exe: %.c libtest.a ../libgmp.a
 	@echo "EXE $@"
 	@$(CC) $(CFLAGS) -o $@ $^
 
