@@ -1,6 +1,8 @@
 
 include Makefile.config
 
+HOST_CC?=$(CC)
+
 CFLAGS:=$(CFLAGS) \
 	-DHAVE_CONFIG_H \
 	-D__GMP_WITHIN_GMP \
@@ -16,7 +18,8 @@ GENERATED=\
 	mpn/jacobitab.h mpn/perfsqr.h mpn/fib_table.c mpn/mp_bases.c
 
 GENERATORS=\
-	gen-fac gen-fib gen-bases gen-trialdivtab gen-jacobitab gen-psqr
+	gen-fac.exe gen-fib.exe gen-bases.exe gen-trialdivtab.exe gen-jacobitab.exe  \
+	gen-psqr.exe
 
 OBJECTS=\
 	assert.o compat.o errno.o extract-dbl.o invalid.o memory.o mp_bpl.o          \
@@ -113,15 +116,31 @@ RAND_OBJECTS=\
 	rand.o randclr.o randdef.o randiset.o randlc2s.o randlc2x.o randmt.o         \
 	randmts.o rands.o randsd.o randsdui.o randbui.o randmui.o
 
-GMP_OBJECTS=\
-	$(addprefix mpn/, $(MPN_OBJECTS))\
-	$(addprefix mpz/, $(MPZ_OBJECTS))\
-	$(addprefix mpq/, $(MPQ_OBJECTS))\
-	$(addprefix mpf/, $(MPF_OBJECTS))\
-	$(addprefix printf/, $(PRINTF_OBJECTS))\
-	$(addprefix scanf/, $(SCANF_OBJECTS))\
-	$(addprefix rand/, $(RAND_OBJECTS))\
-	$(OBJECTS)
+DIRECTORIES?=mpn mpz mpq mpf printf scanf rand
+
+GMP_OBJECTS=$(OBJECTS)
+
+ifneq ($(filter $(DIRECTORIES),mpn),)
+	GMP_OBJECTS+=$(addprefix mpn/, $(MPN_OBJECTS))
+endif
+ifneq ($(filter $(DIRECTORIES), mpz),)
+	GMP_OBJECTS+=$(addprefix mpz/, $(MPZ_OBJECTS))
+endif
+ifneq ($(filter $(DIRECTORIES), mpq),)
+	GMP_OBJECTS+=$(addprefix mpq/, $(MPQ_OBJECTS))
+endif
+ifneq ($(filter $(DIRECTORIES), mpf),)
+	GMP_OBJECTS+=$(addprefix mpf/, $(MPF_OBJECTS))
+endif
+ifneq ($(filter $(DIRECTORIES), printf),)
+	GMP_OBJECTS+=$(addprefix printf/, $(PRINTF_OBJECTS))
+endif
+ifneq ($(filter $(DIRECTORIES), scanf),)
+	GMP_OBJECTS+=$(addprefix scanf/, $(SCANF_OBJECTS))
+endif
+ifneq ($(filter $(DIRECTORIES), rand),)
+	GMP_OBJECTS+=$(addprefix rand/, $(RAND_OBJECTS))
+endif
 
 GMP_PIC_OBJECTS=$(GMP_OBJECTS:.o=.lo)
 
@@ -131,7 +150,6 @@ check: libgmp.a libgmp.so
 	@$(MAKE) -C tests check
 
 libgmp.a: $(GMP_OBJECTS)
-	@echo "AR $@"
 	@$(AR) cq $@ $^
 	@$(RANLIB) $@
 
@@ -139,41 +157,42 @@ libgmp.so: $(GMP_PIC_OBJECTS)
 	@echo "LIB $@"
 	@$(CC) -o $@ -shared $^
 
-fac_table.h: gen-fac
+fac_table.h: gen-fac.exe
+	echo $(GMP_OBJECTS)
 	@echo "GEN $@"
-	@./gen-fac 64 0 >fac_table.h
+	@./$< 64 0 >fac_table.h
 
-fib_table.h: gen-fib
+fib_table.h: gen-fib.exe
 	@echo "GEN $@"
-	@./gen-fib header 64 0 >fib_table.h
+	@./$< header 64 0 >fib_table.h
 
-mp_bases.h: gen-bases
+mp_bases.h: gen-bases.exe
 	@echo "GEN $@"
-	@./gen-bases header 64 0 >mp_bases.h
+	@./$< header 64 0 >mp_bases.h
 
-mpn/fib_table.c: gen-fib
+mpn/fib_table.c: gen-fib.exe
 	@echo "GEN $@"
-	@./gen-fib table 64 0 >mpn/fib_table.c
+	@./$< table 64 0 >mpn/fib_table.c
 
-mpn/jacobitab.h: gen-jacobitab
+mpn/jacobitab.h: gen-jacobitab.exe
 	@echo "GEN $@"
-	@./gen-jacobitab >mpn/jacobitab.h
+	@./$< >mpn/jacobitab.h
 
-mpn/mp_bases.c: gen-bases
+mpn/mp_bases.c: gen-bases.exe
 	@echo "GEN $@"
-	@./gen-bases table 64 0 >mpn/mp_bases.c
+	@./$< table 64 0 >mpn/mp_bases.c
 
-mpn/perfsqr.h: gen-psqr
+mpn/perfsqr.h: gen-psqr.exe
 	@echo "GEN $@"
-	@./gen-psqr 64 0 >mpn/perfsqr.h
+	@./$< 64 0 >mpn/perfsqr.h
 
-trialdivtab.h: gen-trialdivtab
+trialdivtab.h: gen-trialdivtab.exe
 	@echo "GEN $@"
-	@./gen-trialdivtab 64 8000 >trialdivtab.h
+	@./$< 64 8000 >trialdivtab.h
 
-%: %.c
+%.exe: %.c
 	@echo "EXE $@"
-	@$(CC) $< -o $@
+	@$(HOST_CC) $< -o $@
 
 mpn/%.o: mpn/%.c $(GENERATED)
 	@echo "CC  $@"

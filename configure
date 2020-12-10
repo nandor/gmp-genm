@@ -13,55 +13,5 @@ while : ; do
   shift
 done
 
-arch=`cat $prefix/lib/ocaml/Makefile.config | grep '^ARCH' | head -n 1 | sed -e s/ARCH=//g`
-case "$arch" in
-  "llir_amd64")
-    cc="llir_x86_64-unknown-linux-musl-clang"
-    ar="llir_x86_64-unknown-linux-musl-ar"
-    ranlib="llir_x86_64-unknown-linux-musl-ranlib"
-    ;;
-  "amd64")
-    cc="x86_64-unknown-linux-musl-clang"
-    ar="x86_64-linux-gnu-ar"
-    ranlib="x86_64-linux-gnu-ranlib"
-    ;;
-  "llir_arm64")
-    cc="llir_aarch64-unknown-linux-musl-clang"
-    ar="llir_aarch64-unknown-linux-musl-ar"
-    ranlib="llir_aarch64-unknown-linux-musl-ranlib"
-    ;;
-  "arm64")
-    cc="aarch64-unknown-linux-musl-clang"
-    ar="aarch64-linux-gnu-ar"
-    ranlib="aarch64-linux-gnu-ranlib"
-    ;;
-  "llir_power")
-    cc="llir_powerpc64le-unknown-linux-musl-clang"
-    ar="llir_powerpc64le-unknown-linux-musl-ar"
-    ranlib="llir_powerpc64le-unknown-linux-musl-ranlib"
-    ;;
-  "power")
-    cc="powerpc64le-unknown-linux-musl-clang"
-    ar="powerpc64le-unknown-linux-gnu-ar"
-    ranlib="powerpc64le-unknown-linux-gnu-ranlib"
-    ;;
-  "llir_riscv")
-    cc="llir_riscv64-unknown-linux-musl-clang"
-    ar="llir_riscv64-unknown-linux-musl-ar"
-    ranlib="llir_riscv64-unknown-linux-musl-ranlib"
-    ;;
-  "riscv")
-    cc="riscv64-unknown-linux-musl-clang"
-    ar="riscv64-unknown-linux-gnu-ar"
-    ranlib="riscv64-unknown-linux-gnu-ranlib"
-    ;;
-  *)
-    ;;
-esac
-
 echo "# gmp configuration" > Makefile.config
-
-echo "AR=${ar}" >> Makefile.config
-echo "RANLIB=${ranlib}" >> Makefile.config
-echo "CC=${cc}" >> Makefile.config
 echo "PREFIX=${prefix}" >> Makefile.config
