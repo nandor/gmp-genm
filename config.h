@@ -570,7 +570,7 @@ see https://www.gnu.org/licenses/.
 #define VERSION "6.1.2"
 
 /* Define to 1 to enable ASSERT checking, per --enable-assert */
-#define WANT_ASSERT 1
+/* #undef WANT_ASSERT */
 
 /* Define to 1 to enable GMP_CPU_TYPE faking cpuid, per --enable-fake-cpuid */
 /* #undef WANT_FAKE_CPUID */
